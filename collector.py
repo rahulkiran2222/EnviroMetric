@@ -1,20 +1,18 @@
 import time, psutil, json, threading
 import numpy as np
 
-class GreenTraceCollector:
-    def __init__(self, tdp=45, region_carbon_intensity=400):
+# We keep the name EnviroMetric!
+class EnviroMetricEngine:
+    def __init__(self, tdp=45):
         self.tdp = tdp 
-        self.carbon_factor = region_carbon_intensity  # gCO2/kWh
         self.sampling = False
-        self.records = []
 
     def _get_power(self):
-        # Research-grade Linear Power Model
-        cpu = psutil.cpu_percent(interval=0.1)
-        power_w = (self.tdp * 0.1) + (self.tdp * 0.9 * (cpu / 100))
-        return power_w
+        cpu = psutil.cpu_percent(interval=None)
+        return (self.tdp * 0.15) + (self.tdp * 0.85 * (cpu / 100))
 
     def profile(self, func, name):
+        print(f"🔬 EnviroMetric is profiling: {name}...")
         self.sampling = True
         samples = []
         
@@ -35,6 +33,26 @@ class GreenTraceCollector:
         
         duration = end - start
         avg_p = np.mean(samples)
+        energy_j = avg_p * duration
+        
+        return {
+            "Label": name,
+            "Duration_S": round(duration, 4),
+            "Energy_J": round(energy_j, 4),
+            "Carbon_gCO2": round((energy_j / 3600000) * 400, 6),
+            "Power_Timeline": samples
+        }
+
+# --- TEST IT ---
+def task_v1(): [i**2 for i in range(1000000)]
+def task_v2(): np.square(np.arange(1000000))
+
+engine = EnviroMetricEngine()
+data = [engine.profile(task_v1, "Legacy_Code"), engine.profile(task_v2, "Optimized_Code")]
+
+with open("envirometric_data.json", "w") as f:
+    json.dump(data, f)
+print("Done! Upload 'envirometric_data.json' to your dashboard.")        avg_p = np.mean(samples)
         energy_j = avg_p * duration
         # Convert Joules to kWh then to gCO2
         carbon = (energy_j / 3600000) * self.carbon_factor
