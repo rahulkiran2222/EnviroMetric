@@ -1,34 +1,38 @@
-import streamlit as st
+import gradio as gr
 import pandas as pd
 import plotly.express as px
+import json
 
-st.set_page_config(page_title="EnviroMetric Dashboard", layout="wide")
-
-st.title("🔬 EnviroMetric: Research Dashboard")
-st.write("Comparing the Energy Cost of Software Implementations")
-
-uploaded = st.sidebar.file_uploader("Upload research_data.csv", type="csv")
-
-if uploaded:
-    df = pd.read_csv(uploaded)
+def analyze_energy(file):
+    with open(file.name, 'r') as f:
+        data = json.load(f)
     
-    col1, col2 = st.columns(2)
+    df = pd.DataFrame(data)
     
-    with col1:
-        st.subheader("Energy Consumption (Joules)")
-        fig1 = px.bar(df.groupby("Label")["Energy_J"].mean().reset_index(), 
-                     x="Label", y="Energy_J", color="Label")
-        st.plotly_chart(fig1)
+    # Energy Chart
+    fig1 = px.bar(df, x="Label", y="Energy_J", color="Label", 
+                 title="EnviroMetric: Energy Consumption (Joules)",
+                 template="plotly_dark")
+    
+    # Power Timeline Chart
+    timeline = data[0]['Power_Timeline']
+    fig2 = px.line(y=timeline, title=f"Power Profile: {data[0]['Label']} (Watts)",
+                  template="plotly_dark")
+    
+    # Stats
+    savings = ((df['Energy_J'].max() - df['Energy_J'].min()) / df['Energy_J'].max()) * 100
+    report = f"## EnviroMetric Research Report\n\n"
+    report += f"Optimization achieved a **{savings:.2f}%** reduction in energy.\n\n"
+    report += f"**Carbon Impact:** {df['Carbon_gCO2'].min():.6f} gCO2 (Optimized) vs {df['Carbon_gCO2'].max():.6f} gCO2 (Legacy)"
+    
+    return fig1, fig2, report
 
-    with col2:
-        st.subheader("Time vs Energy Efficiency")
-        fig2 = px.scatter(df, x="Duration_S", y="Energy_J", color="Label",
-                         title="Pareto Efficiency Frontier")
-        st.plotly_chart(fig2)
+demo = gr.Interface(
+    fn=analyze_energy,
+    inputs=gr.File(label="Upload EnviroMetric JSON"),
+    outputs=[gr.Plot(), gr.Plot(), gr.Markdown()],
+    title="EnviroMetric: Sustainable Software Analytics",
+    description="PhD Research Project: Analyzing the correlation between code efficiency and hardware power draw."
+)
 
-    # PhD Insight: Statistical Significance
-    st.divider()
-    st.subheader("Research Summary")
-    avg = df.groupby("Label")["Energy_J"].mean()
-    diff = ((avg.max() - avg.min()) / avg.max()) * 100
-    st.info(f"The Optimized version is **{diff:.2f}%** more energy efficient than the Legacy version.")
+demo.launch()
