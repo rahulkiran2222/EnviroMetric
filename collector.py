@@ -52,26 +52,4 @@ data = [engine.profile(task_v1, "Legacy_Code"), engine.profile(task_v2, "Optimiz
 
 with open("envirometric_data.json", "w") as f:
     json.dump(data, f)
-print("Done! Upload 'envirometric_data.json' to your dashboard.")        avg_p = np.mean(samples)
-        energy_j = avg_p * duration
-        # Convert Joules to kWh then to gCO2
-        carbon = (energy_j / 3600000) * self.carbon_factor
-        
-        return {
-            "Label": name,
-            "Duration_S": round(duration, 4),
-            "Energy_J": round(energy_j, 4),
-            "Carbon_gCO2": round(carbon, 6),
-            "Power_Timeline": samples
-        }
-
-# Example use cases
-def task_a(): [i**2 for i in range(1000000)]
-def task_b(): np.square(np.arange(1000000))
-
-collector = GreenTraceCollector()
-data = [collector.profile(task_a, "Legacy_List"), collector.profile(task_b, "Optimized_NumPy")]
-
-with open("data.json", "w") as f:
-    json.dump(data, f)
-print("Saved data.json")
+print("Done! Upload 'envirometric_data.json' to your dashboard.")
