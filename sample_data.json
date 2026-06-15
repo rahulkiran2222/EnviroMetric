@@ -1,0 +1,16 @@
+[
+  {
+    "Label": "Google_Chrome_v120",
+    "Duration_S": 12.45,
+    "Energy_J": 185.32,
+    "Carbon_gCO2": 0.020591,
+    "Power_Timeline": [6.2, 12.5, 25.4, 18.2, 15.1, 14.8, 14.5, 14.2, 14.1, 14.0]
+  },
+  {
+    "Label": "Microsoft_Edge_v120",
+    "Duration_S": 10.12,
+    "Energy_J": 142.15,
+    "Carbon_gCO2": 0.015794,
+    "Power_Timeline": [5.8, 11.2, 22.1, 14.5, 12.1, 11.8, 11.5, 11.2, 11.1, 11.0]
+  }
+]
