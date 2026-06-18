@@ -1,21 +1,35 @@
+<div align="center">
 🌱 EnviroMetric AI
 
-High-Fidelity Software Energy Profiling & Carbon Quantification Framework
+Sustainable Computing: Algorithmic Energy Profiling & Carbon Quantification
 ![alt text](https://img.shields.io/badge/%F0%9F%A4%97%20Live%20Research-Dashboard-yellow?style=for-the-badge)
 
 ![alt text](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python)
 
-![alt text](https://img.shields.io/badge/Field-Sustainable_Computing-emerald?style=for-the-badge)
+![alt text](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-![alt text](https://img.shields.io/badge/Stage-PhD_Research_Candidate-orange?style=for-the-badge)
+![alt text](https://img.shields.io/badge/Status-PhD_Admissions_Candidate-emerald?style=for-the-badge)
 
-EnviroMetric AI is an advanced systems-level framework designed to quantify the relationship between software execution patterns and hardware energy expenditure. Developed for Green Software Engineering research.
+EnviroMetric AI is an advanced systems-level framework designed to quantify the relationship between software execution patterns and hardware energy expenditure.
 
-Explore the Dashboard • View Methodology • Request Collaboration
+Interactive Dashboard • Methodology • GitHub Pages
 
 </div>
-📑 Executive Summary
-Current software optimization focuses almost exclusively on Latency (Time) and Memory (Space). EnviroMetric AI introduces a third dimension: Energy Efficiency. By utilizing hardware-aware linear regression models, this framework translates raw CPU/GPU load cycles into measurable Joules and Carbon Dioxide Equivalents (
+📄 I. Research Abstract
+Current software optimization paradigms focus almost exclusively on Temporal Complexity (
+O
+(
+n
+)
+O(n)
+ time) and Spatial Complexity (Memory usage). EnviroMetric AI introduces Energy Proportionality as a primary metric for software quality. This project provides a rigorous pipeline for measuring CPU power draw and carbon intensity, enabling researchers to identify "carbon-heavy" algorithmic patterns and browser-engine inefficiencies.
+
+🚀 II. Key Features
+High-Frequency Sampling: 20Hz polling of system-level power states via TDP modeling.
+
+Comparative Benchmarking: A/B testing suite for different browsers (Chrome vs. Edge) and algorithms.
+
+Carbon Intensity Mapping: Real-time conversion of Joules to 
 C
 O
 2
@@ -24,43 +38,38 @@ CO
 2
 ​	
  e
-).
+ using global grid intensity coefficients.
 
-🏗 system Architecture
-code
-Mermaid
-graph TD
-    A[User Code / Browser Use Case] --> B{EnviroMetric Collector}
-    B --> C[Multi-threaded Power Sampler]
-    B --> D[Process Orchestrator]
-    C --> E[CPU TDP & Frequency Analysis]
-    D --> F[Selenium Automation Engine]
-    E --> G[(Research Data JSON)]
-    F --> G
-    G --> H[Gradio Dashboard]
-    H --> I[Plotly Statistical Visualization]
-    H --> J[Carbon Impact Estimation]
-🔬 Mathematical Foundation
-To ensure scientific validity in restricted environments (Cloud/WSL), EnviroMetric utilizes the Energy Proportionality Model:
+Power Signatures: Visualizes instantaneous wattage spikes to pinpoint inefficient code blocks.
+
+🛠 III. Technical Stack
+Category	Technology	Purpose
+Language	Python 3.10+	Core logic and numerical processing.
+System Interface	psutil	Low-level hardware resource monitoring.
+Automation	Selenium	Reproducible browser-engine benchmarking.
+Math & Data	NumPy, Pandas	Statistical aggregation and energy integration.
+Visualization	Gradio, Plotly	Academic dashboard and Pareto charting.
+🧪 IV. Scientific Methodology
+The framework employs an Indirect Energy Modeling approach to calculate the total energy consumed (
+E
+E
+) in Joules:
 
 E
-t
-o
-t
-a
-l
 =
 ∫
 t
 =
 0
 T
-[
+(
 P
+s
+t
+a
+t
 i
-d
-l
-e
+c
 +
 (
 P
@@ -69,152 +78,130 @@ a
 x
 −
 P
+s
+t
+a
+t
 i
-d
-l
-e
+c
 )
-×
+⋅
 μ
 (
 t
 )
-]
+)
 d
 t
-E 
-total
-​	
- =∫ 
+E=∫ 
 t=0
 T
 ​	
- [P 
-idle
+ (P 
+static
 ​	
  +(P 
 max
 ​	
  −P 
-idle
+static
 ​	
- )×μ(t)]dt
+ )⋅μ(t))dt
 
-Where:
-
-E
-t
-o
-t
-a
-l
-E 
-total
-​	
- 
- is the total energy consumed in Joules.
+Variables:
 
 P
+s
+t
+a
+t
 i
-d
-l
-e
+c
 P 
-idle
+static
 ​	
  
- is the static power leakage (15% of TDP).
+: System-specific idle power (15% of CPU TDP).
+
+P
+m
+a
+x
+P 
+max
+​	
+ 
+: Maximum Thermal Design Power (TDP) of the processor.
 
 μ
 (
 t
 )
 μ(t)
- is the instantaneous CPU utilization percentage at time 
-t
-t
-.
+: Instantaneous CPU utilization percentage.
 
 T
 T
- is the total execution window.
+: Total execution time in seconds.
 
-🛠 Tech Stack & Requirements
-
-Core Technologies
-Technology	Application
-Python 3.9+	Core logic and data processing.
-Gradio / Plotly	High-end research dashboard and visualization.
-Selenium	Automated browser benchmarking (Chrome/Edge).
-Psutil	Low-level system resource monitoring.
-NumPy	High-speed calculation of energy integrals.
-Hardware Requirements
-Architecture: x86_64 or ARM64.
-
-Sensor Access: User permissions for system-level resource polling.
-
-Internet: Required for Webdriver synchronization and Hugging Face hosting.
-
-📊 Features & Research Capabilities
-[01] Joule-Level Granularity: Provides energy consumption data at sub-second intervals.
-
-[02] Comparative Analytics: Automated "A/B Testing" between different browser engines or code versions.
-
-[03] Carbon Mapping: Real-time conversion of energy into Carbon Footprint based on Global Grid Intensity (
-400
-g
-/
-k
-W
-h
-400g/kWh
-).
-
-[04] Power Profiles: Visualizes the "Power Signature" of an application to identify inefficient CPU spikes.
-
-🚀 Installation & Local Execution
-
-1. Environment Setup
+🏗 V. Framework Architecture
 code
-Bash
-git clone https://github.com/RahulGK/EnviroMetric.git
-cd EnviroMetric
-pip install -r requirements.txt
-2. Execution of Research Protocol
-Run the real-world browser benchmark (Chrome vs Edge):
-
-code
-Bash
-python real_test.py
-3. Data Visualization
-Visit the Hugging Face Dashboard.
-
-Upload the generated envirometric_data.json.
-
-Analyze the Statistical Distribution and Power Timelines.
-
-📂 Project Structure
+Mermaid
+graph LR
+    A[Use Case Script] --> B[EnviroMetric Collector]
+    B --> C{Sampling Engine}
+    C --> D[CPU Load / Frequency]
+    C --> E[Selenium UI Events]
+    D & E --> F[(Data Serialization: JSON)]
+    F --> G[Hugging Face Dashboard]
+    G --> H[Statistical Analysis]
+    G --> I[Carbon Reporting]
+📦 VI. Project Structure
 code
 Text
 EnviroMetric/
 ├── core/
-│   └── collector.py       # Measurement logic & Power Modeling
+│   └── collector.py       # Measurement Engine & Power Models
 ├── benchmarks/
-│   └── real_test.py       # Selenium-based Browser Use Cases
+│   └── real_test.py       # Selenium Browser Use-Cases
 ├── dashboard/
-│   └── app.py             # Gradio Visualization Engine
-├── data_samples/
-│   └── example_data.json  # Pre-generated research data
-├── requirements.txt       # Project Dependencies
-└── README.md              # Documentation
-🎯 Future Research Roadmap
+│   └── app.py             # Gradio Visualization Logic
+├── sample_data/
+│   └── browser_data.json  # Pre-generated Research Dataset
+├── requirements.txt       # Framework Dependencies
+└── index.html             # Research Landing Page
+🏁 VII. Getting Started
 
-Quantization Impact: Measuring energy savings of int8 vs fp16 in LLM inference.
+1. Installation
+code
+Bash
+git clone https://github.com/RahulGK/EnviroMetric.git
+pip install -r requirements.txt
+2. Local Experimentation
+Run the automated browser energy comparison:
 
-Network Energy: Quantifying the energy cost of HTTP requests vs WebSockets.
+code
+Bash
+python benchmarks/real_test.py
+3. Analysis
+Upload the resulting envirometric_data.json to the Live Dashboard to view the energy distributions and power timelines.
 
-OS Variance: Comparing Windows Kernel vs. Linux Scheduler energy management.
-👨‍🔬 Author
+📋 VIII. Requirements
+Hardware: Intel/AMD x86_64 or Apple Silicon (M-series).
+
+Software: Python 3.9+, Google Chrome / Microsoft Edge (for Selenium tests).
+
+System Permissions: The collector requires access to system monitoring APIs (Standard user).
+
+🎯 IX. Future Research Directions
+
+Quantization Impact: Measuring energy variance in int8 vs fp16 LLM inference.
+
+Network Energy: Quantifying the cost of HTTP protocols vs gRPC.
+
+OS Schedulers: Investigating energy management differences between Windows 11 and Ubuntu 24.04.
+👨‍🔬 X. Contact & Attribution
 Rahul GK
 
-"The greenest code is the code that never has to run. The second greenest is the code that runs with EnviroMetric."
+"The most efficient line of code is the one that is never executed. The second most efficient is profiled by EnviroMetric."
+[© EnviroMetric AI - MIT License]
